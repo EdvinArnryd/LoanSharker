@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CalculatorButton : MonoBehaviour
 {
-    [SerializeField] private int _buttonValue;
+    [SerializeField] private char _buttonValue;
     public void OnButtonClick()
     {
         Calculator._Instance.CalculateNumber(_buttonValue);
