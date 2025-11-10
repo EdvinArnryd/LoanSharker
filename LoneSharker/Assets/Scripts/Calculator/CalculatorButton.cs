@@ -5,6 +5,6 @@ public class CalculatorButton : MonoBehaviour
     [SerializeField] private char _buttonValue;
     public void OnButtonClick()
     {
-        Calculator._Instance.CalculateNumber(_buttonValue);
+        Calculator._Instance.EvaluateButtonResult(_buttonValue);
     }
 }
