@@ -53,6 +53,8 @@ public class Calculator : MonoBehaviour
     private void Clear()
     {
         _currentResult = 0;
+        _cachedValue = 0;
+        _cachedOperator = '0';
         OnResultUpdated?.Invoke(_currentResult);
     }
 
@@ -67,13 +69,33 @@ public class Calculator : MonoBehaviour
 
     private void Maths(char _operator)
     {
-        switch(_operator)
+        switch (_operator)
         {
             case '+':
                 _currentResult = _cachedValue + _currentResult;
                 OnResultUpdated?.Invoke(_currentResult);
                 break;
+            case '-':
+                _currentResult = _currentResult - _cachedValue;
+                OnResultUpdated?.Invoke(_currentResult);
+                break;
+            case '*':
+                _currentResult = _currentResult * _cachedValue;
+                OnResultUpdated?.Invoke(_currentResult);
+                break;
+            case '/':
+                _currentResult = _currentResult / _cachedValue;
+                OnResultUpdated?.Invoke(_currentResult);
+                break;
+            default:
+                print("Nothing Happened");
+                break;
         }
+    }
+    
+    private void Equals()
+    {
+        Maths(_cachedOperator);
     }
 
     /// <summary>
@@ -87,42 +109,37 @@ public class Calculator : MonoBehaviour
         switch(buttonResult)
         {
             case '/':
-                if(_isValueCached)
-                    Maths(buttonResult);
-                _cachedOperator = buttonResult;
+                Maths(buttonResult);
                 _cachedValue = _currentResult;
                 _isValueCached = true;
+                _cachedOperator = buttonResult;
                 break;
             case '*':
-                if (_isValueCached)
-                    Maths(buttonResult);
-                _cachedOperator = buttonResult;
                 _cachedValue = _currentResult;
+                Maths(buttonResult);
                 _isValueCached = true;
+                _cachedOperator = buttonResult;
                 break;
             case '+':
-                if (_isValueCached)
-                    Maths(buttonResult);
-                else
-                {
-                    _cachedValue = _currentResult;
-                    _isValueCached = true;
-                    _cachedOperator = buttonResult;
-                    print(_cachedValue);
-                }
-                break;
-            case '-':
-                if (_isValueCached)
-                    Maths(buttonResult);
-                _cachedOperator = buttonResult;
+                Maths(buttonResult);
                 _cachedValue = _currentResult;
                 _isValueCached = true;
+                _cachedOperator = buttonResult;
+                break;
+            case '-':
+                Maths(buttonResult);
+                _cachedValue = _currentResult;
+                _isValueCached = true;
+                _cachedOperator = buttonResult;
                 break;
             case 'c':
                 Clear();
                 break;
             case '<':
                 Backspace();
+                break;
+            case '=':
+                Equals();
                 break;
             case '0':
                 CalculateChar(buttonResult);
