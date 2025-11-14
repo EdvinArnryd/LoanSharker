@@ -21,9 +21,7 @@ public class DayManager : MonoBehaviour
         yield return new WaitForSeconds(0.01f);
         OnDayEnded?.Invoke(_currentDay);
     }
-
-
-
+    
     public void EndDay()
     {
         _currentDay++;
