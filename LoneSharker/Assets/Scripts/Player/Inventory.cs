@@ -7,6 +7,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private int _startBalance = 5000;
     private int _currentBalance;
 
+    private int _amountOfStocks;
+
     public event Action<int> OnBalanceUpdated;
 
     void Start()
@@ -31,5 +33,15 @@ public class Inventory : MonoBehaviour
     {
         _currentBalance -= addAmount;
         OnBalanceUpdated?.Invoke(_currentBalance);
+    }
+
+    public void BuyStocks(int amount)
+    {
+        _amountOfStocks += amount;
+    }
+
+    public void SellStocks(int amount)
+    {
+        _amountOfStocks -= amount;
     }
 }
