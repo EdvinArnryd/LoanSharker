@@ -6,7 +6,6 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private int _startBalance = 5000;
     private int _currentBalance;
-
     private int _amountOfStocks;
 
     public event Action<int> OnBalanceUpdated;
@@ -43,5 +42,10 @@ public class Inventory : MonoBehaviour
     public void SellStocks(int amount)
     {
         _amountOfStocks -= amount;
+    }
+
+    public int GetCurrentBalance()
+    {
+        return _currentBalance;
     }
 }
